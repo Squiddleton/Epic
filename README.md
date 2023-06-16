@@ -72,3 +72,6 @@ client.auth.authenticate({ grant_type: 'authorization_code', code: 'PASTE YOUR A
 ```
 
 Now, you can use the object at `./deviceAuthGrant.json` as your client's grant.
+
+# Credits
+All of the endpoints found for this wrapper were first discovered by the repositories of [MixV2](https://github.com/MixV2/EpicResearch) and [LeleDerGrasshalmi](https://github.com/LeleDerGrasshalmi/FortniteEndpointsDocumentation). This wrapper is not affiliated with Epic Games nor the aforementioned GitHub users.
