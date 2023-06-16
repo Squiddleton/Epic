@@ -7,10 +7,13 @@ export class EpicAuthManager {
 	accountId: string | null = null;
 	autoRefresh: boolean;
 	gameClient: string = FortniteGameClient.IOS;
+	reauthenticate: boolean;
 	#credentials: InternalCredentials | null = null;
-	constructor(autoRefresh: boolean, gameClient?: string) {
+	#lastGrant: AnyGrant = { grant_type: 'client_credentials' };
+	constructor(autoRefresh: boolean, reauthenticate: boolean, gameClient?: string) {
 		this.autoRefresh = autoRefresh;
 		if (gameClient !== undefined) this.gameClient = gameClient;
+		this.reauthenticate = reauthenticate;
 	}
 	#editCredentials(accessTokenResponse: EpicAuthResponse) {
 		this.accountId = accessTokenResponse.account_id;
@@ -28,7 +31,15 @@ export class EpicAuthManager {
 		if (this.#credentials !== null) {
 			const now = Date.now();
 			if (now > this.#credentials.accessExpiresAt) {
-				if (now > this.#credentials.refreshExpiresAt) throw new Error('The Epic access token and refresh token have both expired. Please login with new credentials.');
+				if (now > this.#credentials.refreshExpiresAt) {
+					if (this.reauthenticate) {
+						const res = await this.authenticate(this.#lastGrant);
+						this.#editCredentials(res);
+					}
+					else {
+						throw new Error('The Epic access token and refresh token have both expired. Please login with new credentials.');
+					}
+				}
 				const res = await this.authenticate({
 					grant_type: 'refresh_token',
 					refresh_token: this.#credentials.refreshToken
@@ -49,7 +60,7 @@ export class EpicAuthManager {
 			throw new EpicAPIError(res, rawText, url);
 		}
 	}
-	async authenticate(body: AnyGrant) {
+	async authenticate(grant: AnyGrant) {
 		const res = await this.get<EpicAuthResponse>(
 			EpicEndpoints.AccessToken(),
 			{
@@ -57,10 +68,11 @@ export class EpicAuthManager {
 				headers: {
 					Authorization: `basic ${this.gameClient}`
 				},
-				body: new URLSearchParams({ ...body })
+				body: new URLSearchParams({ ...grant })
 			}
 		);
 
+		this.#lastGrant = grant;
 		this.#editCredentials(res);
 
 		if (this.autoRefresh) {

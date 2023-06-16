@@ -3,6 +3,7 @@
 export interface EpicClientOptions {
 	autoRefresh?: boolean;
 	gameClient?: string;
+	reauthenticate?: boolean;
 	seasonsLength?: number;
 }
 

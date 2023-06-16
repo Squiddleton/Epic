@@ -11,7 +11,7 @@ export class EpicClient {
 	fortnite: FortniteManager;
 	friends: EpicFriendManager;
 	constructor(options: EpicClientOptions = {}) {
-		this.auth = new EpicAuthManager(options.autoRefresh ?? false, options.gameClient);
+		this.auth = new EpicAuthManager(options.autoRefresh ?? false, options.reauthenticate ?? false, options.gameClient);
 		this.discovery = new EpicDiscoveryManager(this.auth);
 		this.fortnite = new FortniteManager(this.auth, options.seasonsLength);
 		this.friends = new EpicFriendManager(this.auth);
