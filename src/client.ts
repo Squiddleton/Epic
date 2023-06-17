@@ -20,7 +20,7 @@ export class EpicClient {
 	getAccountByDisplayName(displayName: string, externalAuthType?: EpicExternalAuthQueryType): Promise<AnyExternalEpicAccount[]>;
 	getAccountByDisplayName(displayName: string, externalAuthType?: EpicExternalAuthQueryType) {
 		return externalAuthType !== undefined
-			? this.auth.get<AnyExternalEpicAccount[]>(EpicEndpoints.AccountByExternalDisplayName(displayName, externalAuthType))
+			? this.auth.get(EpicEndpoints.AccountByExternalDisplayName(displayName, externalAuthType))
 			: this.auth.get(EpicEndpoints.AccountByDisplayName(displayName));
 	}
 	getAccountById(): Promise<SelfInternalEpicAccount>;
