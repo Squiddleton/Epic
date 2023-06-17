@@ -42,9 +42,7 @@ epicClient.auth.authenticate(grant)
 	});
 ```
 
-By default, the access token provided when first logging in will be used for the entire process, even though it will usually expire in 2 hours. If you would like it to refresh each time it expires, use the `autoRefresh` option when constructing the client, i.e. `new EpicClient({ autoRefresh: true })`.
-
-Getting an authentication grant often appears more difficult than it seems. A recommended flow is to get a temporary access token using the `authorization_code` grant, use that token to generate semi-permanent device auth credentials, and pass those credentials into the `device_auth` grant.
+Getting an authentication grant often appears more difficult than it is. A recommended flow is to get a temporary access token using the `authorization_code` grant, use that token to generate semi-permanent device auth credentials, and pass those credentials into the `device_auth` grant.
 
 In your browser, go to https://www.epicgames.com and log in. Then, visiting the following link will return a JSON object with an authorization code: https://www.epicgames.com/id/api/redirect?clientId=3446cd72694c4a4485d81b77adbb2141&responseType=code
 

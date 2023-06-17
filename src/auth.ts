@@ -6,23 +6,10 @@ import { FortniteGameClient } from './util.js';
 export class EpicAuthManager {
 	accountId: string | null = null;
 	gameClient: string = FortniteGameClient.IOS;
-	reauthenticate: boolean;
 	#credentials: InternalCredentials | null = null;
 	#lastGrant: AnyGrant = { grant_type: 'client_credentials' };
-	constructor(autoRefresh: boolean, reauthenticate: boolean, gameClient?: string) {
+	constructor(gameClient?: string) {
 		if (gameClient !== undefined) this.gameClient = gameClient;
-		this.reauthenticate = reauthenticate;
-
-		if (autoRefresh) {
-			setInterval(async () => {
-				if (this.#credentials !== null) {
-					await this.authenticate({
-						grant_type: 'refresh_token',
-						refresh_token: this.#credentials.refreshToken
-					});
-				}
-			}, 7200000);
-		}
 	}
 	#editCredentials(accessTokenResponse: EpicAuthResponse) {
 		this.accountId = accessTokenResponse.account_id;
@@ -41,8 +28,7 @@ export class EpicAuthManager {
 			const now = Date.now();
 			if (now > this.#credentials.accessExpiresAt) {
 				if (now > this.#credentials.refreshExpiresAt) {
-					if (this.reauthenticate) await this.authenticate(this.#lastGrant);
-					else throw new Error('The Epic access token and refresh token have both expired. Please login with new credentials.');
+					throw new Error('The Epic access token and refresh token have both expired. Please login with new credentials.');
 				}
 				else {
 					await this.authenticate({
@@ -50,6 +36,7 @@ export class EpicAuthManager {
 						refresh_token: this.#credentials.refreshToken
 					});
 				}
+
 			}
 		}
 
