@@ -18,6 +18,8 @@ All functionality is performed via the `EpicClient` class. All properties and me
 
 ## Examples
 
+### Basic Function Calls
+
 ```js
 const { EpicClient } = require('@squiddleton/epic');
 const grant = require('./grant.json');
@@ -41,6 +43,8 @@ epicClient.auth.authenticate(grant)
 		console.log('The current shop tab ids are:', Object.keys(timeline.channels['client-events'].states[0].state.sectionStoreEnds));
 	});
 ```
+
+### First Time Authenticating
 
 Getting an authentication grant often appears more difficult than it is. A recommended flow is to get a temporary access token using the `authorization_code` grant, use that token to generate semi-permanent device auth credentials, and pass those credentials into the `device_auth` grant.
 
@@ -68,6 +72,17 @@ client.auth.authenticate({ grant_type: 'authorization_code', code: 'PASTE YOUR A
 ```
 
 Now, you can use the object at `./deviceAuthGrant.json` as your client's grant.
+
+### Refreshing Access Token
+
+By default, access tokens expire after about two hours. If you only authenticate once and make an API call after the token has expired, an error will be thrown. The `autoRefresh` option when constructing an `EpicClient` instance will internally reauthenticate with the `refresh_token` grant type once the access token has expired.
+
+```js
+const client = new EpicClient({ autoRefresh: true });
+
+// Everything else is normal! 
+client.auth.authenticate(grant);
+```
 
 # Credits
 All of the endpoints found for this wrapper were first discovered by the repositories of [MixV2](https://github.com/MixV2/EpicResearch) and [LeleDerGrasshalmi](https://github.com/LeleDerGrasshalmi/FortniteEndpointsDocumentation). This wrapper is not affiliated with Epic Games nor the aforementioned GitHub users.
