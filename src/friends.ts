@@ -40,7 +40,7 @@ export class EpicFriendManager {
 		);
 	}
 	getBlocklist(accountId = this.auth.getAccountId()) {
-		return this.auth.get<BaseEpicFriend>(EpicEndpoints.Blocklist(accountId));
+		return this.auth.get<BaseEpicFriend[]>(EpicEndpoints.Blocklist(accountId));
 	}
 	getExternalSettings(source: EpicFriendsExternalSource, accountId = this.auth.getAccountId()) {
 		return this.auth.get<EpicFriendsExternalSettings>(EpicEndpoints.FriendsExternalSettings(accountId, source));
