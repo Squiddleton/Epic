@@ -1,6 +1,7 @@
 // Public Wrapper Options
 
 export interface EpicClientOptions {
+	autoRefresh?: boolean;
 	gameClient?: string;
 	seasonsLength?: number;
 }
