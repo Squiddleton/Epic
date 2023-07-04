@@ -1,34 +1,34 @@
 {
-  "name": "@squiddleton/epic",
-  "version": "0.5.0",
-  "description": "A light Node.js wrapper for the Epic Games API.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "author": "Squiddleton",
-  "license": "MIT",
-  "keywords": [
-    "epic",
-    "fortnite",
-    "api",
-    "wrapper"
-  ],
-  "scripts": {
-    "lint": "eslint . --fix",
-    "build": "tsc",
-    "prepublishOnly": "npm run build",
-    "start": "npm run build && node ."
-  },
-  "devDependencies": {
-    "@types/node": "^18.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
-    "eslint": "^8.28.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-tsdoc": "^0.2.17",
-    "typescript": "^5.1.3"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
+	"name": "@squiddleton/epic",
+	"version": "0.6.0",
+	"description": "A light Node.js wrapper for the Epic Games API.",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"author": "Squiddleton",
+	"license": "MIT",
+	"keywords": [
+		"epic",
+		"fortnite",
+		"api",
+		"wrapper"
+	],
+	"scripts": {
+		"lint": "eslint . --fix",
+		"build": "tsc",
+		"prepublishOnly": "npm run build",
+		"start": "npm run build && node ."
+	},
+	"devDependencies": {
+		"@types/node": "^18.0.0",
+		"@typescript-eslint/eslint-plugin": "^5.43.0",
+		"@typescript-eslint/parser": "^5.43.0",
+		"eslint": "^8.28.0",
+		"eslint-import-resolver-typescript": "^3.5.2",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-tsdoc": "^0.2.17",
+		"typescript": "^5.1.3"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
 }
