@@ -35,7 +35,7 @@ export class EpicAuthManager {
 					await this.authenticate({
 						grant_type: 'refresh_token',
 						refresh_token: this.#credentials.refreshToken
-					}, false);
+					});
 				}
 
 			}
@@ -53,7 +53,7 @@ export class EpicAuthManager {
 			throw new EpicAPIError(res, rawText, url);
 		}
 	}
-	async authenticate(grant: AnyGrant, checkCredentials = true) {
+	async authenticate(grant: AnyGrant) {
 		const res = await this.get<EpicAuthResponse>(
 			EpicEndpoints.AccessToken(),
 			{
@@ -63,7 +63,7 @@ export class EpicAuthManager {
 				},
 				body: new URLSearchParams({ ...grant })
 			},
-			checkCredentials
+			false
 		);
 
 		this.#editCredentials(res);
@@ -73,7 +73,7 @@ export class EpicAuthManager {
 				await this.authenticate({
 					grant_type: 'refresh_token',
 					refresh_token: res.refresh_token
-				}, false);
+				});
 			}, res.expires_in * 1000);
 		}
 
