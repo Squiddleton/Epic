@@ -6,7 +6,7 @@ import { getBattlePassLevels } from './util.js';
 export class FortniteManager {
 	auth: EpicAuthManager;
 	seasonsLength: number;
-	constructor(auth: EpicAuthManager, seasonsLength = 25) {
+	constructor(auth: EpicAuthManager, seasonsLength = 26) {
 		this.auth = auth;
 		this.seasonsLength = seasonsLength;
 	}
