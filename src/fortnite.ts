@@ -1,6 +1,6 @@
 import { EpicAuthManager } from './auth.js';
 import { EpicEndpoints } from './endpoints.js';
-import type { BRInventory, EpicCollectionCategory, EpicFriendCode, EpicFriendCodeType, EpicMCPProfileId, EpicMCPRoute, EpicReceipt, EpicStats, GetBulkStatsOptions, GetTrackProgressOptions, HabaneroTrackProgress, LongHabaneroTrack, STWWorldInfo, ShortHabaneroTrack, StorefrontCatalog, Timeline } from './types.js';
+import type { BRInventory, EpicCollectionCategory, EpicFriendCode, EpicFriendCodeType, EpicMCPProfileId, EpicMCPRoute, EpicReceipt, EpicStats, EpicStatsTimeWindow, GetBulkStatsOptions, GetTrackProgressOptions, HabaneroTrackProgress, LongHabaneroTrack, STWWorldInfo, ShortHabaneroTrack, StorefrontCatalog, Timeline } from './types.js';
 import { getBattlePassLevels } from './util.js';
 
 export class FortniteManager {
@@ -59,8 +59,8 @@ export class FortniteManager {
 	getReceipts(accountId = this.auth.getAccountId()) {
 		return this.auth.get<EpicReceipt[]>(EpicEndpoints.Receipts(accountId));
 	}
-	getStats(accountId = this.auth.getAccountId()) {
-		return this.auth.get<EpicStats>(EpicEndpoints.Stats(accountId));
+	getStats(accountId = this.auth.getAccountId(), timeWindow: EpicStatsTimeWindow = {}) {
+		return this.auth.get<EpicStats>(EpicEndpoints.Stats(accountId, timeWindow));
 	}
 	getSTWWorldInfo() {
 		return this.auth.get<STWWorldInfo>(EpicEndpoints.STWWorldInfo());

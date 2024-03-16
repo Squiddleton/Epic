@@ -853,6 +853,11 @@ export interface STWWorldInfo {
 
 export type EpicCollectionCategory = 'fish' | 'character';
 
+export interface EpicStatsTimeWindow {
+	startTime?: number;
+	endTime?: number;
+}
+
 export interface EpicStats {
 	startTime: number;
 	endTime: number;

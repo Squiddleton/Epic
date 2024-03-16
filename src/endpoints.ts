@@ -1,4 +1,4 @@
-import type { EpicCollectionCategory, EpicExternalAuthQueryType, EpicFriendCodeType, EpicFriendsExternalSource, EpicFriendsType, EpicMCPProfileId, EpicMCPRoute, HabaneroNamespace } from './types.js';
+import type { EpicCollectionCategory, EpicExternalAuthQueryType, EpicFriendCodeType, EpicFriendsExternalSource, EpicFriendsType, EpicMCPProfileId, EpicMCPRoute, EpicStatsTimeWindow, HabaneroNamespace } from './types.js';
 
 export const EpicEndpoints = {
 	AccessToken() {
@@ -82,8 +82,11 @@ export const EpicEndpoints = {
 	Receipts(accountId: string) {
 		return `https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/receipts/v1/account/${accountId}/receipts`;
 	},
-	Stats(accountId: string) {
-		return `https://statsproxy-public-service-live.ol.epicgames.com/statsproxy/api/statsv2/account/${accountId}`;
+	Stats(accountId: string, timeWindow: EpicStatsTimeWindow) {
+		const init: Record<string, string> = {};
+		Object.entries(timeWindow).forEach(([k, v]) => init[k] = v.toString());
+		const queryParams = new URLSearchParams(init).toString();
+		return `https://statsproxy-public-service-live.ol.epicgames.com/statsproxy/api/statsv2/account/${accountId}${queryParams === '' ? '' : `?${queryParams}`}`;
 	},
 	STWWorldInfo() {
 		return 'https://fngw-mcp-gc-livefn.ol.epicgames.com/fortnite/api/game/v2/world/info';
