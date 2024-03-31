@@ -60,7 +60,7 @@ export class FortniteManager {
 		return this.auth.get<EpicReceipt[]>(EpicEndpoints.Receipts(accountId));
 	}
 	getStats(accountId = this.auth.getAccountId(), timeWindow: EpicStatsTimeWindow = {}) {
-		return this.auth.get<EpicStats>(EpicEndpoints.Stats(accountId, timeWindow));
+		return this.auth.get<EpicStats | null>(EpicEndpoints.Stats(accountId, timeWindow));
 	}
 	getSTWWorldInfo() {
 		return this.auth.get<STWWorldInfo>(EpicEndpoints.STWWorldInfo());

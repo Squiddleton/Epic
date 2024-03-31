@@ -45,6 +45,7 @@ export class EpicAuthManager {
 		if (!returnRes) return res.status;
 
 		if (res.ok) {
+			if (res.status === 204) return null;
 			const returned: ResType = await res.json();
 			return returned;
 		}
