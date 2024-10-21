@@ -48,7 +48,7 @@ epicClient.auth.authenticate(grant)
 
 Getting an authentication grant often appears more difficult than it is. A recommended flow is to get a temporary access token using the `authorization_code` grant, use that token to generate semi-permanent device auth credentials, and pass those credentials into the `device_auth` grant.
 
-In your browser, go to https://www.epicgames.com and log in. Then, visiting the following link will return a JSON object with an authorization code: https://www.epicgames.com/id/api/redirect?clientId=3446cd72694c4a4485d81b77adbb2141&responseType=code
+In your browser, go to https://www.epicgames.com and log in. Then, visiting the following link will return a JSON object with an authorization code: https://www.epicgames.com/id/api/redirect?clientId=34a02cf8f4414e29b15921876da36f9a&responseType=code
 
 Note that this authorization code can expire very quickly, so the following methods should be called as soon as you have visited the link.
 
