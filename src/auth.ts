@@ -7,7 +7,7 @@ export class EpicAuthManager {
 	#credentials: InternalCredentials | null = null;
 	accountId: string | null = null;
 	autoRefresh: boolean;
-	gameClient: string = FortniteGameClient.IOS;
+	gameClient: string = FortniteGameClient.ANDROID;
 	constructor(autoRefresh: boolean, gameClient?: string) {
 		this.autoRefresh = autoRefresh;
 		if (gameClient !== undefined) this.gameClient = gameClient;
