@@ -1,6 +1,6 @@
 {
 	"name": "@squiddleton/epic",
-	"version": "0.9.0",
+	"version": "0.10.0",
 	"description": "A light Node.js wrapper for the Epic Games API.",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
